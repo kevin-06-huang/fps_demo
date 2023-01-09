@@ -11,6 +11,8 @@ const { json, urlencoded } = require('express');
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
+app.get('/', (req, res)=> res.status(200).sendFile(path.join(__dirname, '../client', 'index.html')));
+
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
