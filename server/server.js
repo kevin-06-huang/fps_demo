@@ -2,6 +2,9 @@ require('dotenv').config();
 
 const path = require('path');
 const express = require('express');
+const mongoose = require('mongoose');
+
+const userController = require(path.join(__dirname, 'controller', 'userController.js'));
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,6 +15,14 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 
 app.get('/', (req, res)=> res.status(200).sendFile(path.join(__dirname, '../client', 'index.html')));
+
+app.get('/signup', (req, res) => res.sendFile(path.resolve(__dirname, '../client/signup.html')));
+
+/*app.post('/login', userController.
+  (req, res) => {
+  // what should happen here on successful log in?
+    res.redirect('/secret');
+});*/
 
 app.use((err, req, res, next) => {
   const defaultErr = {
@@ -24,10 +35,7 @@ app.use((err, req, res, next) => {
   
   return res.status(errorObj.status).json(errorObj.message);
 });
-  
-  /**
-   * start server
-   */
+
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });
