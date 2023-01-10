@@ -1,5 +1,5 @@
 {
-  "name": "prototype",
+  "name": "han_solo_project",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kevin-06-huang/prototype.git"
+    "url": "git+https://github.com/kevin-06-huang/han_solo_project.git"
   },
   "keywords": [],
   "author": "",

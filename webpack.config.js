@@ -21,6 +21,12 @@ module.exports = {
     compress: true,
     hot: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
+    proxy: {
+      '/signup': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+    },
   },
   module: {
     rules: [
