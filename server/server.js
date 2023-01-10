@@ -2,7 +2,16 @@ require('dotenv').config();
 
 const path = require('path');
 const express = require('express');
+
 const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  dbName: process.env.MONGO_DBNAME
+})
+  .then(() => console.log('Connected to Mongo DB.'))
+  .catch(err => console.log(err));
 
 const userController = require(path.join(__dirname, 'controller', 'userController.js'));
 
@@ -18,13 +27,13 @@ app.get('/', (req, res)=> res.status(200).sendFile(path.join(__dirname, '../clie
 
 //app.get('/signup', (req, res) => res.sendFile(path.resolve(__dirname, '../client/signup.html')));
 
-/*app.post('/signup', 
+app.post('/signup', 
   userController.createUser,
   (req, res) => {
     // what should happen here on successful sign up?
     res.status(200).json({});
     //res.redirect('/secret');
-});*/
+});
 
 /*app.post('/login', userController.
   (req, res) => {

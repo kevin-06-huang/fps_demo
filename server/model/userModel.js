@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -15,7 +17,7 @@ userSchema.pre('save', async function(next) {
 
     // generate a salt
     try{
-      const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
+      const salt = await bcrypt.genSalt(process.env.SALT_WORK_FACTOR);
       const hash = await bcrypt.hash(user.password, salt);
       user.password = hash;
       return next();
