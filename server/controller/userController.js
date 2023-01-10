@@ -11,6 +11,7 @@ userController.createUser = async (req, res, next) => {
       const newUser = await User.create({ username, password });
       res.locals.id = newUser._id.toString();
       return next();*/
+      return next();
     }
     catch (err) {
         return next({

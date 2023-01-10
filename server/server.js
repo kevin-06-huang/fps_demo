@@ -16,7 +16,15 @@ app.use(urlencoded({ extended: true }));
 
 app.get('/', (req, res)=> res.status(200).sendFile(path.join(__dirname, '../client', 'index.html')));
 
-app.get('/signup', (req, res) => res.sendFile(path.resolve(__dirname, '../client/signup.html')));
+//app.get('/signup', (req, res) => res.sendFile(path.resolve(__dirname, '../client/signup.html')));
+
+/*app.post('/signup', 
+  userController.createUser,
+  (req, res) => {
+    // what should happen here on successful sign up?
+    res.status(200).json({});
+    //res.redirect('/secret');
+});*/
 
 /*app.post('/login', userController.
   (req, res) => {
