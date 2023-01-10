@@ -1,6 +1,8 @@
 require('dotenv').config();
 
 const path = require('path');
+const cookieParser = require('cookie-parser');
+
 const express = require('express');
 
 const mongoose = require('mongoose');
@@ -14,6 +16,8 @@ mongoose.connect(process.env.MONGO_URI, {
   .catch(err => console.log(err));
 
 const userController = require(path.join(__dirname, 'controller', 'userController.js'));
+const sessionController = require(path.join(__dirname, 'controller', 'sessionController.js'));
+const cookieController = require(path.join(__dirname, 'controller', 'cookieController.js'));
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,6 +26,7 @@ const { json, urlencoded } = require('express');
 
 app.use(json());
 app.use(urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.get('/', (req, res)=> res.status(200).sendFile(path.join(__dirname, '../client', 'index.html')));
 
@@ -29,9 +34,11 @@ app.get('/', (req, res)=> res.status(200).sendFile(path.join(__dirname, '../clie
 
 app.post('/signup', 
   userController.createUser,
+  sessionController.startSession,
+  cookieController.setSSIDCookie,
   (req, res) => {
     // what should happen here on successful sign up?
-    res.status(200).json({});
+    res.redirect('/');
     //res.redirect('/secret');
 });
 

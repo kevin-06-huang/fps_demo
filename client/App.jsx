@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Game from './components/Game';
 
 //import './stylesheets/styles.css';
 
@@ -13,8 +14,13 @@ class App extends Component {
     };
   }
 
+  getSSID() {
+    // document.cookie
+    return true;
+  } 
+
   render() {
-    return true ?
+    return !this.getSSID() ?
     <div>
       <main>
         <Routes>
@@ -29,7 +35,7 @@ class App extends Component {
           <Route
             exact
             path="/"
-            element={Login}
+            element={<Game/>}
           />
         </Routes>
       </main>
