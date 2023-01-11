@@ -4,14 +4,13 @@ import { usePlane, useSphere } from '@react-three/cannon'
 import { Physics } from "@react-three/rapier"
 import { KeyboardControls, OrbitControls, PerspectiveCamera, PointerLockControls, Sky } from '@react-three/drei'
 
-import Webcam from "react-webcam";
-
 //import Hall from './Hall';
 import Ground from './Ground';
 import Player from './Player';
 import Hall from './Hall';
 import Carbonite from './Carbonite';
 import Darth from './Darth';
+import Force from './Force';
 //import Vehicle from './Vehicle';
 // import GroundCannon from './GroundCannon';
 //<PerspectiveCamera position={[0, 1, 5]} rotation={[0, - 0.5 * Math.PI / 10, 0]} makeDefault/>
@@ -24,7 +23,7 @@ const Game = (props) => {
 
   return (
             <div id="canvas-container" style={{height: window.innerHeight, width: window.innerWidth}}>
-            <Webcam ref={webcamRef} style={{display: "none" }} />
+            <Force ref={webcamRef} />
             <KeyboardControls
                 map={[
                 { name: "forward", keys: ["ArrowUp", "w", "W"] },
