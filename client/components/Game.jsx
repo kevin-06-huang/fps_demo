@@ -4,6 +4,8 @@ import { usePlane, useSphere } from '@react-three/cannon'
 import { Physics } from "@react-three/rapier"
 import { KeyboardControls, OrbitControls, PerspectiveCamera, PointerLockControls, Sky } from '@react-three/drei'
 
+import Webcam from "react-webcam";
+
 //import Hall from './Hall';
 import Ground from './Ground';
 import Player from './Player';
@@ -18,8 +20,11 @@ import Darth from './Darth';
 // <Vehicle position={[3, 3, 0]} rotation={[0, -Math.PI / 4, 0]} angularVelocity={[0, 0.5, 0]} wheelRadius={0.3} />
 // <GroundCannon rotation={[-Math.PI / 2, 0, 0]} userData={{ id: 'floor' }} />
 const Game = (props) => {
+  const webcamRef = useRef(null);
+
   return (
             <div id="canvas-container" style={{height: window.innerHeight, width: window.innerWidth}}>
+            <Webcam ref={webcamRef} style={{display: "none" }} />
             <KeyboardControls
                 map={[
                 { name: "forward", keys: ["ArrowUp", "w", "W"] },

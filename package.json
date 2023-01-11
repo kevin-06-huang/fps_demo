@@ -34,6 +34,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.1",
+    "react-webcam": "^7.0.1",
     "three": "^0.148.0",
     "url-loader": "^4.1.1",
     "webpack-cli": "^5.0.1",
