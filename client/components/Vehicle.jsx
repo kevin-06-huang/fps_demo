@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useRaycastVehicle } from '@react-three/cannon'
-import { useControls } from '../utils/useControls'
+import useControls from '../utils/useControls'
 import Beetle from './Beetle'
 import Wheel from './Wheel'
 

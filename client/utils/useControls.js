@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 
-export function useKeyPress(target, event) {
+const useKeyPress = (target, event) => {
   useEffect(() => {
     const downHandler = ({ key }) => target.indexOf(key) !== -1 && event(true)
     const upHandler = ({ key }) => target.indexOf(key) !== -1 && event(false)
@@ -13,7 +13,7 @@ export function useKeyPress(target, event) {
   }, [])
 }
 
-export function useControls() {
+const useControls = () => {
   const keys = useRef({ forward: false, backward: false, left: false, right: false, brake: false, reset: false })
   useKeyPress(['ArrowUp', 'w'], (pressed) => (keys.current.forward = pressed))
   useKeyPress(['ArrowDown', 's'], (pressed) => (keys.current.backward = pressed))
@@ -23,3 +23,5 @@ export function useControls() {
   useKeyPress(['r'], (pressed) => (keys.current.reset = pressed))
   return keys
 }
+
+export default useControls;

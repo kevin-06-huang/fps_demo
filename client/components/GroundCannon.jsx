@@ -1,7 +1,7 @@
 import React from 'react';
 import { usePlane } from '@react-three/cannon'
 
-const Ground = (props) => {
+const GroundCannon = (props) => {
     const [ref] = usePlane(() => ({ type: 'Static', material: 'ground', ...props }))
     return (
       <group ref={ref}>
@@ -13,4 +13,4 @@ const Ground = (props) => {
     )
 }
 
-export default Ground;
+export default GroundCannon;
