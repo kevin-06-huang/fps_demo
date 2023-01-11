@@ -29,11 +29,7 @@ const Player = (props) => {
     return (
       <mesh
         {...props}
-        ref={ref}
-        scale={clicked ? 1.5 : 1}
-        onClick={(event) => click(!clicked)}
-        onPointerOver={(event) => hover(true)}
-        onPointerOut={(event) => hover(false)}>
+        ref={ref}>
         <sphereGeometry args={[0.75]} geometry={[0, 0, 0]} material={ {color: 0xffff00 }}/>
         <meshPhysicalMaterial transmission={1} roughness={0} thickness={10} envMapIntensity={1} />
       </mesh>
