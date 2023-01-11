@@ -6,6 +6,7 @@ import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 //import Hall from './Hall';
 import Ground from './Ground';
 import Player from './Player';
+import Vehicle from './Vehicle';
 
 const Game = (props) => {
   return (
@@ -27,7 +28,9 @@ const Game = (props) => {
                   <PerspectiveCamera position={[0, 1, 5]} rotation={[0, - 0.5 * Math.PI / 10, 0]} makeDefault/>
                   <Player position={[0, 2, 1.5]} />
                   <Ground rotation={[-Math.PI / 2, 0, 0]} userData={{ id: 'floor' }} />
+                  <Vehicle position={[0, 2, 0]} rotation={[0, -Math.PI / 4, 0]} angularVelocity={[0, 0.5, 0]} wheelRadius={0.3} />
                 </Physics>
+                <OrbitControls/>
             </Canvas>
             </div>
         );
