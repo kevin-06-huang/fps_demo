@@ -7,6 +7,7 @@ import { KeyboardControls, OrbitControls, PerspectiveCamera, PointerLockControls
 //import Hall from './Hall';
 import Ground from './Ground';
 import Player from './Player';
+import Hall from './Hall';
 //import Vehicle from './Vehicle';
 // import GroundCannon from './GroundCannon';
 //<PerspectiveCamera position={[0, 1, 5]} rotation={[0, - 0.5 * Math.PI / 10, 0]} makeDefault/>
@@ -42,6 +43,7 @@ const Game = (props) => {
                     <Physics gravity={[0, -5, 0]} >
                         <Ground />
                         <Player />
+                        <Hall position={[0, 1.5, 1]}/>
                     </Physics>
                     <PointerLockControls />
                 </Canvas>
