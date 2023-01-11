@@ -10,7 +10,7 @@ import Player from './Player';
 import Hall from './actors/Hall';
 import Carbonite from './actors/Carbonite';
 import Darth from './actors/Darth';
-import Force from './force/Force';
+//import Force from './force/Force';
 import ATAT from './actors/ATAT';
 //import Vehicle from './Vehicle';
 // import GroundCannon from './GroundCannon';
