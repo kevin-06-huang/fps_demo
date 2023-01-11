@@ -24,10 +24,10 @@ const Game = (props) => {
                     }}
                 />
                 <Physics iterations={5} gravity={[0, -30, 0]} >
+                  <PerspectiveCamera position={[0, 1, 5]} rotation={[0, - 0.5 * Math.PI / 10, 0]} makeDefault/>
                   <Player position={[0, 2, 1.5]} />
                   <Ground rotation={[-Math.PI / 2, 0, 0]} userData={{ id: 'floor' }} />
                 </Physics>
-                <OrbitControls/>
             </Canvas>
             </div>
         );
