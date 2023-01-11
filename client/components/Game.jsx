@@ -6,11 +6,11 @@ import { KeyboardControls, OrbitControls, PerspectiveCamera, PointerLockControls
 
 //import Hall from './Hall';
 import Ground from './Ground';
-import Player from './Player';
-import Hall from './Hall';
-import Carbonite from './Carbonite';
-import Darth from './Darth';
-import Force from './Force';
+import Player from './actors/Player';
+import Hall from './actors/Hall';
+import Carbonite from './actors/Carbonite';
+import Darth from './actors/Darth';
+import Force from './force/Force';
 //import Vehicle from './Vehicle';
 // import GroundCannon from './GroundCannon';
 //<PerspectiveCamera position={[0, 1, 5]} rotation={[0, - 0.5 * Math.PI / 10, 0]} makeDefault/>
