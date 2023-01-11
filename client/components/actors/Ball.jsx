@@ -5,7 +5,7 @@ import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useGLTF, useTexture } from '@react-three/drei';
 
-const Player = (props) => {
+const Ball = (props) => {
     // This reference gives us direct access to the THREE.Mesh object
     //const ref = useRef()
     const [ref] = useSphere(
@@ -36,5 +36,5 @@ const Player = (props) => {
     )
   }
 
-  export default Player;
+  export default Ball;
   //useGLTF.preload('../assets/darth_vader.gltf')
