@@ -32,11 +32,7 @@ class App extends Component {
     <div className="router">
       <main>
         <Routes>
-          <Route
-            exact
-            path="/"
-            element={<Game/>}
-          />
+          <Route exact path="/" element={<Game/>}/>
         </Routes>
       </main>
     </div>
