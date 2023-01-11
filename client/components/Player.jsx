@@ -3,7 +3,7 @@ import { Physics, usePlane, useSphere } from '@react-three/cannon'
 import { useFrame } from '@react-three/fiber';
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, useTexture } from '@react-three/drei';
 
 const Player = (props) => {
     // This reference gives us direct access to the THREE.Mesh object
@@ -31,7 +31,7 @@ const Player = (props) => {
         {...props}
         ref={ref}>
         <sphereGeometry args={[0.75]} geometry={[0, 0, 0]} material={ {color: 0xffff00 }}/>
-        <meshPhysicalMaterial transmission={1} roughness={0} thickness={10} envMapIntensity={1} />
+        <meshPhysicalMaterial map={useTexture("../assets/Cs5Cn-GUAAA-uJM.jpeg")} transmission={0} roughness={0} thickness={10} envMapIntensity={1} />
       </mesh>
     )
   }
