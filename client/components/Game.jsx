@@ -19,12 +19,12 @@ import ATAT from './actors/ATAT';
 // import { Physics, usePlane, useSphere } from '@react-three/cannon'
 // <Vehicle position={[3, 3, 0]} rotation={[0, -Math.PI / 4, 0]} angularVelocity={[0, 0.5, 0]} wheelRadius={0.3} />
 // <GroundCannon rotation={[-Math.PI / 2, 0, 0]} userData={{ id: 'floor' }} />
+// <Force ref={webcamRef} />
 const Game = (props) => {
   const webcamRef = useRef(null);
 
   return (
             <div id="canvas-container" style={{height: window.innerHeight, width: window.innerWidth}}>
-            <Force ref={webcamRef} />
             <KeyboardControls
                 map={[
                 { name: "forward", keys: ["ArrowUp", "w", "W"] },

@@ -8,12 +8,15 @@ title: Female Frozen In Carbonite Low Poly
 
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { RigidBody } from "@react-three/rapier"
 
 const Carbonite = (props) => {
+  const ref = useRef();
   const { nodes, materials } = useGLTF(
     "/assets/female_frozen_in_carbonite_low_poly.glb"
   );
   return (
+    <RigidBody {...props} type="fixed" colliders="cuboid" ref={ref}>
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
@@ -30,6 +33,7 @@ const Carbonite = (props) => {
         </group>
       </group>
     </group>
+    </RigidBody>
   );
 }
 
