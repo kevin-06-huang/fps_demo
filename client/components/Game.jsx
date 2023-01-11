@@ -8,6 +8,8 @@ import { KeyboardControls, OrbitControls, PerspectiveCamera, PointerLockControls
 import Ground from './Ground';
 import Player from './Player';
 import Hall from './Hall';
+import Carbonite from './Carbonite';
+import Darth from './Darth';
 //import Vehicle from './Vehicle';
 // import GroundCannon from './GroundCannon';
 //<PerspectiveCamera position={[0, 1, 5]} rotation={[0, - 0.5 * Math.PI / 10, 0]} makeDefault/>
@@ -44,6 +46,8 @@ const Game = (props) => {
                         <Ground />
                         <Player />
                         <Hall position={[0, 1.5, 1]}/>
+                        <Carbonite/>
+                        <Darth position={[0, 0, 1]} scale={[0.01,0.01,0.01]}/>
                     </Physics>
                     <PointerLockControls />
                 </Canvas>
