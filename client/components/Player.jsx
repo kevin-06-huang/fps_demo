@@ -5,6 +5,7 @@ import { useFrame } from "@react-three/fiber"
 import { useKeyboardControls } from "@react-three/drei"
 import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier"
 import Axe from "./Axe"
+import Blaster from "./Blaster"
 
 const SPEED = 5
 const direction = new THREE.Vector3()
