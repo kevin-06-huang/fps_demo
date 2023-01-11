@@ -23,7 +23,7 @@ const  Player = ({ lerp = THREE.MathUtils.lerp }) => {
     // update camera
     state.camera.position.set(...ref.current.translation())
     // update blaster
-    blaster.current.children[0].rotation.x = lerp(blaster.current.children[0].rotation.x, Math.sin((velocity.length() > 1) * state.clock.elapsedTime * 10) / 6, 0.1)
+    blaster.current.children[0].rotation.x = lerp(blaster.current.children[0].rotation.x, Math.sin((velocity.length() > 1) * state.clock.elapsedTime * 10) / 40, 0.1)
     blaster.current.rotation.copy(state.camera.rotation)
     blaster.current.position.copy(state.camera.position).add(state.camera.getWorldDirection(rotation).multiplyScalar(1))
     // movement
