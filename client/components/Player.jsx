@@ -4,7 +4,6 @@ import React, { useRef } from "react"
 import { useFrame } from "@react-three/fiber"
 import { useKeyboardControls } from "@react-three/drei"
 import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier"
-import Axe from "./Axe"
 import Blaster from "./Blaster"
 
 const SPEED = 5
@@ -14,7 +13,7 @@ const sideVector = new THREE.Vector3()
 const rotation = new THREE.Vector3()
 
 const  Player = ({ lerp = THREE.MathUtils.lerp }) => {
-  const axe = useRef()
+  const blaster = useRef()
   const ref = useRef()
   const rapier = useRapier()
   const [, get] = useKeyboardControls()
@@ -23,10 +22,10 @@ const  Player = ({ lerp = THREE.MathUtils.lerp }) => {
     const velocity = ref.current.linvel()
     // update camera
     state.camera.position.set(...ref.current.translation())
-    // update axe
-    axe.current.children[0].rotation.x = lerp(axe.current.children[0].rotation.x, Math.sin((velocity.length() > 1) * state.clock.elapsedTime * 10) / 6, 0.1)
-    axe.current.rotation.copy(state.camera.rotation)
-    axe.current.position.copy(state.camera.position).add(state.camera.getWorldDirection(rotation).multiplyScalar(1))
+    // update blaster
+    blaster.current.children[0].rotation.x = lerp(blaster.current.children[0].rotation.x, Math.sin((velocity.length() > 1) * state.clock.elapsedTime * 10) / 6, 0.1)
+    blaster.current.rotation.copy(state.camera.rotation)
+    blaster.current.position.copy(state.camera.position).add(state.camera.getWorldDirection(rotation).multiplyScalar(1))
     // movement
     frontVector.set(0, 0, backward - forward)
     sideVector.set(left - right, 0, 0)
@@ -43,8 +42,8 @@ const  Player = ({ lerp = THREE.MathUtils.lerp }) => {
       <RigidBody ref={ref} colliders={false} mass={1} type="dynamic" position={[0, 10, 0]} enabledRotations={[false, false, false]}>
         <CapsuleCollider args={[0.75, 0.5]} />
       </RigidBody>
-      <group ref={axe} onPointerMissed={(e) => (axe.current.children[0].rotation.x = -0.5)}>
-        <Axe position={[0.3, -0.35, 0.5]} />
+      <group ref={blaster} onPointerMissed={(e) => (blaster.current.children[0].rotation.x = 0.5)}>
+        <Blaster rotation={[0,-Math.PI / 2,0]} position={[0.3, -0.25, 0.5]} scale={[0.001,0.001,0.001]}/>
       </group>
     </>
   )
