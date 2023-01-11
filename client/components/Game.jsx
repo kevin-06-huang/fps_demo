@@ -11,6 +11,7 @@ import Hall from './actors/Hall';
 import Carbonite from './actors/Carbonite';
 import Darth from './actors/Darth';
 import Force from './force/Force';
+import ATAT from './actors/ATAT';
 //import Vehicle from './Vehicle';
 // import GroundCannon from './GroundCannon';
 //<PerspectiveCamera position={[0, 1, 5]} rotation={[0, - 0.5 * Math.PI / 10, 0]} makeDefault/>
@@ -52,6 +53,7 @@ const Game = (props) => {
                         <Hall position={[0, 1.5, 1]}/>
                         <Carbonite/>
                         <Darth position={[0, 0, 1]} scale={[0.01,0.01,0.01]}/>
+                        <ATAT position={[5, -0.5, 10]}/>
                     </Physics>
                     <PointerLockControls />
                 </Canvas>
