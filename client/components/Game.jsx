@@ -6,7 +6,7 @@ import { KeyboardControls, OrbitControls, PerspectiveCamera, PointerLockControls
 
 //import Hall from './Hall';
 import Ground from './Ground';
-import Player from './actors/Player';
+import Player from './Player';
 import Hall from './actors/Hall';
 import Carbonite from './actors/Carbonite';
 import Darth from './actors/Darth';

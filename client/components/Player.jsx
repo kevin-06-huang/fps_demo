@@ -4,8 +4,8 @@ import React, { useRef } from "react"
 import { useFrame } from "@react-three/fiber"
 import { useKeyboardControls } from "@react-three/drei"
 import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier"
-import Blaster from "./Blaster"
-import Crosshair from "../Crosshair"
+import Blaster from "./actors/Blaster"
+import Crosshair from "./Crosshair"
 
 const SPEED = 5
 const direction = new THREE.Vector3()
