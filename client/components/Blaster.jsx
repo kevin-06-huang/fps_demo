@@ -9,7 +9,9 @@ import React from 'react';
 import { useGLTF } from "@react-three/drei"
 
 const Axe = (props) => {
-  const { nodes, materials } = useGLTF('../assets/axe.glb')
+  const { nodes, materials } = useGLTF('../assets/blaster.glb')
+  console.log(nodes);
+  console.log(materials);
   return (
     <group dispose={null} {...props}>
       <group rotation={[0, Math.PI / 1.8, -0.3]} scale={0.5}>
@@ -22,4 +24,4 @@ const Axe = (props) => {
 
 export default Axe;
 
-useGLTF.preload("../assets/axe.glb")
+useGLTF.preload("../assets/blaster.glb")

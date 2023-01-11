@@ -12,7 +12,7 @@ const frontVector = new THREE.Vector3()
 const sideVector = new THREE.Vector3()
 const rotation = new THREE.Vector3()
 
-export default function Player({ lerp = THREE.MathUtils.lerp }) {
+const  Player = ({ lerp = THREE.MathUtils.lerp }) => {
   const axe = useRef()
   const ref = useRef()
   const rapier = useRapier()
@@ -48,3 +48,5 @@ export default function Player({ lerp = THREE.MathUtils.lerp }) {
     </>
   )
 }
+
+export default Player;

@@ -4,7 +4,7 @@ import { useTexture } from "@react-three/drei"
 import { CuboidCollider, RigidBody } from "@react-three/rapier"
 import grass from "../assets/grass.jpg"
 
-export default function Ground(props) {
+const Ground = (props) => {
   const texture = useTexture(grass)
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping
   return (
@@ -17,3 +17,5 @@ export default function Ground(props) {
     </RigidBody>
   )
 }
+
+export default Ground;
