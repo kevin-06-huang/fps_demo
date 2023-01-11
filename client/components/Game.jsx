@@ -24,11 +24,11 @@ const Game = (props) => {
                     self.target.updateMatrixWorld()
                     }}
                 />
-                <Physics iterations={5} gravity={[0, -30, 0]} >
+                <Physics iterations={5} gravity={[0, -5, 0]} >
                   <PerspectiveCamera position={[0, 1, 5]} rotation={[0, - 0.5 * Math.PI / 10, 0]} makeDefault/>
                   <Player position={[0, 2, 1.5]} />
                   <Ground rotation={[-Math.PI / 2, 0, 0]} userData={{ id: 'floor' }} />
-                  <Vehicle position={[0, 2, 0]} rotation={[0, -Math.PI / 4, 0]} angularVelocity={[0, 0.5, 0]} wheelRadius={0.3} />
+                  <Vehicle position={[3, 3, 0]} rotation={[0, -Math.PI / 4, 0]} angularVelocity={[0, 0.5, 0]} wheelRadius={0.3} />
                 </Physics>
                 <OrbitControls/>
             </Canvas>
