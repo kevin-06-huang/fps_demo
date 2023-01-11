@@ -5,6 +5,7 @@ import { useFrame } from "@react-three/fiber"
 import { useKeyboardControls } from "@react-three/drei"
 import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier"
 import Blaster from "./Blaster"
+import Crosshair from "./Crosshair"
 
 const SPEED = 5
 const direction = new THREE.Vector3()
@@ -42,6 +43,7 @@ const  Player = ({ lerp = THREE.MathUtils.lerp }) => {
       <RigidBody ref={ref} colliders={false} mass={1} type="dynamic" position={[0, 10, 0]} enabledRotations={[false, false, false]}>
         <CapsuleCollider args={[0.75, 0.5]} />
       </RigidBody>
+      <Crosshair/>
       <group ref={blaster} onPointerMissed={(e) => (blaster.current.children[0].rotation.x = 0.5)}>
         <Blaster rotation={[0,-Math.PI / 2,0]} position={[0.3, -0.25, 0.5]} scale={[0.001,0.001,0.001]}/>
       </group>
