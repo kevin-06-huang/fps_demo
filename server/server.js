@@ -28,6 +28,8 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.use('/assets', express.static(path.join(__dirname, '../client', 'assets')));
+
 app.get('/', (req, res)=> res.status(200).sendFile(path.join(__dirname, '../client', 'index.html')));
 
 //app.get('/signup', (req, res) => res.sendFile(path.resolve(__dirname, '../client/signup.html')));
