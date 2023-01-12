@@ -83,7 +83,7 @@ const Game = (props) => {
                         <Player addProjectile={addProjectile} useForce={useForce} weapon={weapon} switchWeapon={switchWeapon}/>
                         <Hall position={[0, 1.5, 1]}/>
                         <Carbonite/>
-                        <Darth position={[0, 0, 1]} scale={[0.01,0.01,0.01]}/>
+                        <Darth position={[4, 0, 1]} scale={[0.01,0.01,0.01]}/>
                         <ATAT position={[5, -0.5, 10]}/>
                         <Projectiles/>
                     </Physics>
