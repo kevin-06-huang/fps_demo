@@ -10,7 +10,7 @@ import Player from './Player';
 import Hall from './actors/Hall';
 import Carbonite from './actors/Carbonite';
 import Darth from './actors/Darth';
-//import Force from './force/Force';
+import Force from './force/Force';
 import ATAT from './actors/ATAT';
 import { create } from "zustand"
 import Projectile from './actors/Projectile';
@@ -21,18 +21,23 @@ import Projectile from './actors/Projectile';
 // import { Physics, usePlane, useSphere } from '@react-three/cannon'
 // <Vehicle position={[3, 3, 0]} rotation={[0, -Math.PI / 4, 0]} angularVelocity={[0, 0.5, 0]} wheelRadius={0.3} />
 // <GroundCannon rotation={[-Math.PI / 2, 0, 0]} userData={{ id: 'floor' }} />
-// <Force ref={webcamRef} />
+// 
 const useGameStore = create((set) => ({
+    force: false,
     projectiles: [],
     addProjectile: (x, y, z) => {
         set((state) => ({ projectiles: [...state.projectiles, [x, y, z]] }));
     },
+    useForce: (bool) => set((state) => ({ force: bool })),
   }))
 
 const Game = (props) => {
   const webcamRef = useRef(null);
+
   const addProjectile = useGameStore((state) => state.addProjectile);
-  
+  const force = useGameStore((state) => state.force);
+  const useForce = useGameStore((state) => state.useForce);
+
   const Projectiles = () => {
     const projectiles = useGameStore((state) => state.projectiles);
     return projectiles.map((coords, index) => <Projectile key={index} position={coords} />);
@@ -40,6 +45,7 @@ const Game = (props) => {
 
   return (
             <div id="canvas-container" style={{height: window.innerHeight, width: window.innerWidth}}>
+            {force ? <Force ref={webcamRef} /> : <></>}
             <KeyboardControls
                 map={[
                 { name: "forward", keys: ["ArrowUp", "w", "W"] },
@@ -47,6 +53,7 @@ const Game = (props) => {
                 { name: "left", keys: ["ArrowLeft", "a", "A"] },
                 { name: "right", keys: ["ArrowRight", "d", "D"] },
                 { name: "jump", keys: ["Space"] },
+                { name: "force", keys: ["f", "F"] },
             ]}>
                 <Canvas>
                     <Sky sunPosition={[100, 20, 100]} />
@@ -64,7 +71,7 @@ const Game = (props) => {
                     />
                     <Physics gravity={[0, -5, 0]} >
                         <Ground />
-                        <Player addProjectile={addProjectile}/>
+                        <Player addProjectile={addProjectile} useForce={useForce}/>
                         <Hall position={[0, 1.5, 1]}/>
                         <Carbonite/>
                         <Darth position={[0, 0, 1]} scale={[0.01,0.01,0.01]}/>

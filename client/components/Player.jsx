@@ -14,7 +14,7 @@ const frontVector = new THREE.Vector3()
 const sideVector = new THREE.Vector3()
 const rotation = new THREE.Vector3()
 
-const  Player = ({ addProjectile, lerp = THREE.MathUtils.lerp }) => {
+const  Player = ({ addProjectile, useForce, lerp = THREE.MathUtils.lerp }) => {
   const blaster = useRef()
   const ref = useRef()
   const rapier = useRapier()
@@ -38,7 +38,8 @@ const  Player = ({ addProjectile, lerp = THREE.MathUtils.lerp }) => {
   }
 
   useFrame((state) => {
-    const { forward, backward, left, right, jump } = get()
+    const { forward, backward, left, right, jump, force } = get()
+    useForce(force);
     const velocity = ref.current.linvel()
     // update camera
     state.camera.position.set(...ref.current.translation())
