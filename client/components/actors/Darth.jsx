@@ -10,7 +10,9 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import {Line, Vector3} from "three";
-let justCreated = true;
+
+import wilhelm from "../../assets/wilhelm.mp3"
+const scream = new Audio(wilhelm)
 
 const Darth = (props) => {
   const ref = useRef();
@@ -29,7 +31,7 @@ const Darth = (props) => {
    }
   )
   return (
-    <group {...props} dispose={null} ref={ref} onClick={()=>{console.log('tet')}}>
+    <group {...props} dispose={null} ref={ref} onClick={()=>{scream.play()}}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <mesh
