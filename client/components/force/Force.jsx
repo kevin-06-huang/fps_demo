@@ -34,7 +34,7 @@ const Force = React.forwardRef((props,ref) => {
         // loop and detect hand
         setInterval(() => {
           detect(net)
-        }, 100);
+        }, 500);
     
     }
 
@@ -78,7 +78,10 @@ const Force = React.forwardRef((props,ref) => {
                 Math.max.apply(null, confidence)
               );
               console.log(gesture.gestures[maxConfidence].name);
-              if (gesture.gestures[maxConfidence].name === 'raised_hand') force.play();
+              if (gesture.gestures[maxConfidence].name === 'raised_hand') { 
+                props.setNextForcePower("push");
+                force.play(); 
+              }
             }
           }
     

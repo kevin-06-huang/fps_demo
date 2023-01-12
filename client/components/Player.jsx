@@ -20,7 +20,7 @@ const frontVector = new THREE.Vector3()
 const sideVector = new THREE.Vector3()
 const rotation = new THREE.Vector3()
 
-const  Player = ({ addProjectile, useForce, weapon, switchWeapon, lerp = THREE.MathUtils.lerp }) => {
+const  Player = ({ addProjectile, useForce, weapon, switchWeapon, forcePowerToFire, lerp = THREE.MathUtils.lerp }) => {
   const weaponRef = useRef()
   const ref = useRef()
   const rapier = useRapier()
@@ -45,6 +45,9 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, lerp = THREE.M
   }
 
   useFrame((state) => {
+    if (forcePowerToFire === "push") {
+      fireProjectile();
+    }
     const { forward, backward, left, right, jump, force, one, two } = get()
     if (force) useForce();
     if (one) switchWeapon(1);

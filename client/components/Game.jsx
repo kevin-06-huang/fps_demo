@@ -31,6 +31,8 @@ const useGameStore = create((set) => ({
     },
     switchWeapon: (num) => set((state) => ({ weapon: num })),
     useForce: () => set((state) => ({ force: !state.force })),
+    forcePowerToFire: "none",
+    setNextForcePower: (power) => set((state) => ({ forcePowerToFire: power })),
   }))
 
 const Game = (props) => {
@@ -41,6 +43,8 @@ const Game = (props) => {
   const useForce = useGameStore((state) => state.useForce);
   const weapon = useGameStore((state) => state.weapon);
   const switchWeapon = useGameStore((state) => state.switchWeapon);
+  const forcePowerToFire = useGameStore((state) => state.forcePowerToFire);
+  const setNextForcePower = useGameStore((state) => state.setNextForcePower);
 
   const Projectiles = () => {
     const projectiles = useGameStore((state) => state.projectiles);
@@ -52,7 +56,7 @@ const Game = (props) => {
 
   return (
             <div id="canvas-container" style={{height: window.innerHeight, width: window.innerWidth}}>
-            {force ? <Force ref={webcamRef} /> : <></>}
+            {force ? <Force ref={webcamRef} setNextForcePower={setNextForcePower}/> : <></>}
             <KeyboardControls
                 map={[
                 { name: "forward", keys: ["ArrowUp", "w", "W"] },
@@ -80,7 +84,8 @@ const Game = (props) => {
                     />
                     <Physics gravity={[0, -5, 0]} >
                         <Ground />
-                        <Player addProjectile={addProjectile} useForce={useForce} weapon={weapon} switchWeapon={switchWeapon}/>
+                        <Player addProjectile={addProjectile} useForce={useForce} weapon={weapon} switchWeapon={switchWeapon}
+                        forcePowerToFire={forcePowerToFire}/>
                         <Hall position={[0, 1.5, 1]}/>
                         <Carbonite/>
                         <Darth position={[4, 0, 1]} scale={[0.01,0.01,0.01]}/>
