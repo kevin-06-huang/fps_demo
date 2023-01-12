@@ -17,7 +17,6 @@ const Projectile = (props) => {
   );
 
   useFrame(() => {
-    console.log('pewwwww');
     const [x, y, z] = ref.current.position
     ref.current.position.set(x + 0.1, y, z);
    // ref.current.position.set();
