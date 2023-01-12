@@ -8,13 +8,30 @@ title: Grenade Launcher Projectile (Downloadable)
 
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
 const Projectile = (props) => {
+  const ref = useRef();
   const { nodes, materials } = useGLTF(
     "/assets/grenade_launcher_projectile_downloadable.glb"
   );
+
+  useFrame(() => {
+    console.log('pewwwww');
+    const [x, y, z] = ref.current.position
+    ref.current.position.set(x + 0.1, y, z);
+   // ref.current.position.set();
+   // ref.current.velocity.set(0, 0, 0)
+    //console.log(state);
+    /*const vector = new Vector3(0, 0, -0.8).unproject(camera);
+    const [x, y, z] = vector
+    dot.current.position.set(x, y, z);
+    lines.current.position.set(x, y, z);
+    lines.current.rotation.set(camera.rotation._x, camera.rotation._y, camera.rotation._z, camera.rotation._order);*/
+  }
+  )
   return (
-    <group {...props} dispose={null}>
+    <group {...props} ref={ref} dispose={null}>
       <group
         position={[0, -0.01, 0.01]}
         rotation={[-Math.PI / 2, 0, 0]}

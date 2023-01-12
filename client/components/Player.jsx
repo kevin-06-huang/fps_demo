@@ -22,7 +22,8 @@ const  Player = ({ addProjectile, lerp = THREE.MathUtils.lerp }) => {
   const [, get] = useKeyboardControls()
 
   const fireProjectile = () => {
-    addProjectile(0,0,0);
+    const [x, y, z] = blaster.current.position;
+    addProjectile(x, y, z);
     /*const geometry = new THREE.BoxGeometry(1,1,10);
     const material = new THREE.MeshBasicMaterial( { color: '#BADA55' } );
     const projectile = new THREE.Mesh(geometry, material);
