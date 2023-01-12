@@ -1,8 +1,10 @@
+// this reference https://github.com/Johnsuuuu/gesture-recognition extensively
 import React, { useRef, useState } from "react"
 
 import Webcam from "react-webcam";
 import * as handpose from "@tensorflow-models/handpose";
 import * as fp from "fingerpose";
+// this line is necessary
 import * as tf from "@tensorflow/tfjs";
 
 import ThumbsDownGesture from "./gestures/ThumbsDown.js";
