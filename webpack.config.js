@@ -60,7 +60,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(glb|gltf)$/,
+        test: /\.(mp3|glb|gltf)$/,
         use:
         [
             {

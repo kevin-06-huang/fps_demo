@@ -7,7 +7,9 @@ import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier"
 import Blaster from "./actors/Blaster"
 import Crosshair from "./Crosshair"
 import Sword from "./actors/Sword"
-import Axe from "./actors/Axe"
+
+import blasterSound from "../assets/blaster.mp3"
+const pew = new Audio(blasterSound)
 
 const SPEED = 5
 const direction = new THREE.Vector3()
@@ -76,6 +78,7 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, lerp = THREE.M
         <Crosshair/>
         <group ref={weaponRef} onPointerMissed={(e) => {
           weaponRef.current.children[0].rotation.x = 0.5;
+          pew.play();
           fireProjectile();
         }}>
           <Blaster rotation={[0,-Math.PI / 2,0]} position={[0.3, -0.25, 0.5]} scale={[0.001,0.001,0.001]}/>
