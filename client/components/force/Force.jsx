@@ -78,7 +78,7 @@ const Force = React.forwardRef((props,ref) => {
                 Math.max.apply(null, confidence)
               );
               console.log(gesture.gestures[maxConfidence].name);
-              force.play();
+              if (gesture.gestures[maxConfidence].name === 'raised_hand') force.play();
             }
           }
     
