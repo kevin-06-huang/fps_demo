@@ -53,8 +53,10 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, lerp = THREE.M
     weaponRef.current.position.copy(state.camera.position).add(state.camera.getWorldDirection(rotation).multiplyScalar(1))
     // movement
     frontVector.set(0, 0, backward - forward)
-    if ((forward - backward) != 0) weaponRef.current.children[0].rotation.x = 1.5;
-    if ((right - left) != 0) weaponRef.current.children[0].rotation.x = 1.5;
+    if(weapon === 1) {
+      if ((forward - backward) != 0) weaponRef.current.children[0].rotation.x = 1.5;
+      if ((right - left) != 0) weaponRef.current.children[0].rotation.x = 1.5;
+    }
     sideVector.set(left - right, 0, 0)
     direction.subVectors(frontVector, sideVector).normalize().multiplyScalar(SPEED).applyEuler(state.camera.rotation)
     ref.current.setLinvel({ x: direction.x, y: velocity.y, z: direction.z })
@@ -83,7 +85,7 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, lerp = THREE.M
         <group ref={weaponRef} onPointerMissed={(e) => {
           weaponRef.current.children[0].rotation.x = 0.5;
         }}>
-          <Sword position={[1,1,1]} scale={[1000,1000,1000]}/>
+          <Sword position={[1,0,0]} rotation={[0, 0.2, Math.PI ]} scale={[0.12,0.12,0.12]}/>
         </group>
       </>}
       
