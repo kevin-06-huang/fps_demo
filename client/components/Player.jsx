@@ -83,9 +83,9 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, lerp = THREE.M
       </> :
       <>
         <group ref={weaponRef} onPointerMissed={(e) => {
-          weaponRef.current.children[0].rotation.x = 0.5;
+          weaponRef.current.children[0].rotation.x = -3.14;
         }}>
-          <Sword position={[1,0,0]} rotation={[0, 0.2, Math.PI ]} scale={[0.12,0.12,0.12]}/>
+          <Sword position={[1,0,0]} rotation={[0, 12, Math.PI ]} scale={[0.12,0.12,0.12]}/>
         </group>
       </>}
       
