@@ -28,7 +28,7 @@ const useGameStore = create((set) => ({
     addProjectile: (x, y, z) => {
         set((state) => ({ projectiles: [...state.projectiles, [x, y, z]] }));
     },
-    useForce: (bool) => set((state) => ({ force: bool })),
+    useForce: () => set((state) => ({ force: !state.force })),
   }))
 
 const Game = (props) => {

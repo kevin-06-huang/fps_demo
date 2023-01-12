@@ -39,7 +39,8 @@ const  Player = ({ addProjectile, useForce, lerp = THREE.MathUtils.lerp }) => {
 
   useFrame((state) => {
     const { forward, backward, left, right, jump, force } = get()
-    useForce(force);
+    console.log(force);
+    if(force) useForce();
     const velocity = ref.current.linvel()
     // update camera
     state.camera.position.set(...ref.current.translation())
