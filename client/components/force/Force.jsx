@@ -22,6 +22,9 @@ import PointRightGesture from "./gestures/PointRight.js";
 import PointLeftGesture from "./gestures/PointLeft.js";
 import RaisedFistGesture from "./gestures/RaisedFist.js";
 
+import forceSound from "../../assets/magic-spell-6005.mp3"
+const force = new Audio(forceSound)
+
 
 const Force = React.forwardRef((props,ref) => {
 
@@ -75,6 +78,7 @@ const Force = React.forwardRef((props,ref) => {
                 Math.max.apply(null, confidence)
               );
               console.log(gesture.gestures[maxConfidence].name);
+              force.play();
             }
           }
     
