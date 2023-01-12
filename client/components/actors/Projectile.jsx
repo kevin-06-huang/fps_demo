@@ -18,23 +18,25 @@ const Projectile = (props) => {
   const { nodes, materials } = useGLTF(
     "/assets/grenade_launcher_projectile_downloadable.glb"
   );
- // const { camera } = useThree();
+  const { camera } = useThree();
   
   
   useFrame(() => {
     if (justFired) {
-        /*const vector = new Vector3(0, 0, -0.8).unproject(camera);
+        const vector = new Vector3(0, 0, -0.8).unproject(camera);
         const [x, y, z] = vector
-        ref.current.position.set(x, y, z);*/
+        ref.current.position.set(x, y, z);
         justFired = false;
     } else {
         const [x, y, z] = ref.current.position
-        const [_x, _y, _z] = ref.current.rotation
+        //const [_x, _y, _z] = ref.current.rotation
+        const b = new Vector3(1,0,0);
+        const delta = b.applyEuler(ref.current.rotation);
        // console.log(_x);
        // console.log(Math.PI);
         //console.log(Math.sin());
         const velocity = 0.1;
-        ref.current.position.set(x, y, z-0.1);
+        ref.current.position.set(x + velocity * delta.x, y + velocity * delta.y, z + velocity * delta.z);
         /*console.log(x,y,z);
         console.log(_x, _y, _z);
         console.log(ref.current);*/
