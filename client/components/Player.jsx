@@ -18,6 +18,8 @@ const  Player = ({ lerp = THREE.MathUtils.lerp }) => {
   const ref = useRef()
   const rapier = useRapier()
   const [, get] = useKeyboardControls()
+  const fireProjectile = () => {
+  }
   useFrame((state) => {
     const { forward, backward, left, right, jump } = get()
     const velocity = ref.current.linvel()
@@ -29,6 +31,8 @@ const  Player = ({ lerp = THREE.MathUtils.lerp }) => {
     blaster.current.position.copy(state.camera.position).add(state.camera.getWorldDirection(rotation).multiplyScalar(1))
     // movement
     frontVector.set(0, 0, backward - forward)
+    if ((forward - backward) != 0) blaster.current.children[0].rotation.x = 1.5;
+    if ((right - left) != 0) blaster.current.children[0].rotation.x = 1.5;
     sideVector.set(left - right, 0, 0)
     direction.subVectors(frontVector, sideVector).normalize().multiplyScalar(SPEED).applyEuler(state.camera.rotation)
     ref.current.setLinvel({ x: direction.x, y: velocity.y, z: direction.z })
@@ -44,7 +48,10 @@ const  Player = ({ lerp = THREE.MathUtils.lerp }) => {
         <CapsuleCollider args={[0.75, 0.5]} />
       </RigidBody>
       <Crosshair/>
-      <group ref={blaster} onPointerMissed={(e) => (blaster.current.children[0].rotation.x = 0.5)}>
+      <group ref={blaster} onPointerMissed={(e) => {
+        blaster.current.children[0].rotation.x = 0.5;
+        fireProjectile();
+        }}>
         <Blaster rotation={[0,-Math.PI / 2,0]} position={[0.3, -0.25, 0.5]} scale={[0.001,0.001,0.001]}/>
       </group>
     </>
