@@ -1,11 +1,12 @@
 import * as THREE from "three"
 import * as RAPIER from "@dimforge/rapier3d-compat"
 import React, { useRef } from "react"
-import { useFrame } from "@react-three/fiber"
+import { useFrame, useThree } from "@react-three/fiber"
 import { useKeyboardControls } from "@react-three/drei"
 import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier"
 import Blaster from "./actors/Blaster"
 import Crosshair from "./Crosshair"
+import Projectile from "./actors/Projectile"
 
 const SPEED = 5
 const direction = new THREE.Vector3()
@@ -17,9 +18,23 @@ const  Player = ({ lerp = THREE.MathUtils.lerp }) => {
   const blaster = useRef()
   const ref = useRef()
   const rapier = useRapier()
+  //const { scene } = useThree();
   const [, get] = useKeyboardControls()
+
   const fireProjectile = () => {
+    /*const geometry = new THREE.BoxGeometry(1,1,10);
+    const material = new THREE.MeshBasicMaterial( { color: '#BADA55' } );
+    const projectile = new THREE.Mesh(geometry, material);
+    console.log(projectile.position);
+    projectile.position.set(blaster.current.position.x,blaster.current.position.y,blaster.current.position.z + 2)
+    scene.add(projectile);
+    console.log();*/
+    //console.log(this.);
+   // console.log(cube.position);
+   // setTimeout(()=>{cube.position.set(0,1,0);
+    //console.log(cube.position)}, 1000);
   }
+
   useFrame((state) => {
     const { forward, backward, left, right, jump } = get()
     const velocity = ref.current.linvel()
