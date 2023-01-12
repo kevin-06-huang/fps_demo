@@ -14,7 +14,7 @@ const frontVector = new THREE.Vector3()
 const sideVector = new THREE.Vector3()
 const rotation = new THREE.Vector3()
 
-const  Player = ({ lerp = THREE.MathUtils.lerp }) => {
+const  Player = ({ addProjectile, lerp = THREE.MathUtils.lerp }) => {
   const blaster = useRef()
   const ref = useRef()
   const rapier = useRapier()
@@ -22,6 +22,7 @@ const  Player = ({ lerp = THREE.MathUtils.lerp }) => {
   const [, get] = useKeyboardControls()
 
   const fireProjectile = () => {
+    addProjectile(0,0,0);
     /*const geometry = new THREE.BoxGeometry(1,1,10);
     const material = new THREE.MeshBasicMaterial( { color: '#BADA55' } );
     const projectile = new THREE.Mesh(geometry, material);
