@@ -28,7 +28,7 @@ const Darth = (props) => {
       const b = new Vector3(1,0,0);
       const delta = b.applyEuler(ref.current.rotation);
       const velocity = 0.05;
-      ref.current.position.set(x + velocity * (Math.random()-0.5), y, z + velocity * (Math.random()-0.5));
+      ref.current.position.set(x + velocity * (camera.position.x - x), y, z + velocity * (camera.position.z - z));
       ref.current.rotation.set(_x , _y + Math.PI * (Math.random()-0.5), _z);
       i = 0;
     }  
