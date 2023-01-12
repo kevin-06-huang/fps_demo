@@ -24,10 +24,12 @@ import Projectile from './actors/Projectile';
 // 
 const useGameStore = create((set) => ({
     force: false,
+    weapon: 1,
     projectiles: [],
-    addProjectile: (x, y, z) => {
-        set((state) => ({ projectiles: [...state.projectiles, [x, y, z]] }));
+    addProjectile: (x, y, z, _x, _y, _z) => {
+        set((state) => ({ projectiles: [...state.projectiles, [x, y, z, _x, _y, _z]] }));
     },
+    switchWeapon: (num) => set((state) => ({ weapon: num })),
     useForce: () => set((state) => ({ force: !state.force })),
   }))
 
@@ -37,10 +39,15 @@ const Game = (props) => {
   const addProjectile = useGameStore((state) => state.addProjectile);
   const force = useGameStore((state) => state.force);
   const useForce = useGameStore((state) => state.useForce);
+  const weapon = useGameStore((state) => state.weapon);
+  const switchWeapon = useGameStore((state) => state.switchWeapon);
 
   const Projectiles = () => {
     const projectiles = useGameStore((state) => state.projectiles);
-    return projectiles.map((coords, index) => <Projectile key={index} position={coords} />);
+    return projectiles.map((coords, index) => {
+        const [x, y, z, _x, _y, _z] = coords;
+    return <Projectile key={index} position={[x, y, z]} rotation={[_x, _y, _z]}/>
+    });
   }
 
   return (
@@ -54,6 +61,8 @@ const Game = (props) => {
                 { name: "right", keys: ["ArrowRight", "d", "D"] },
                 { name: "jump", keys: ["Space"] },
                 { name: "force", keys: ["f", "F"] },
+                { name: "one", keys: ["1", "!"] },
+                { name: "two", keys: ["2", "@"] },
             ]}>
                 <Canvas>
                     <Sky sunPosition={[100, 20, 100]} />
@@ -71,7 +80,7 @@ const Game = (props) => {
                     />
                     <Physics gravity={[0, -5, 0]} >
                         <Ground />
-                        <Player addProjectile={addProjectile} useForce={useForce}/>
+                        <Player addProjectile={addProjectile} useForce={useForce} weapon={weapon} switchWeapon={switchWeapon}/>
                         <Hall position={[0, 1.5, 1]}/>
                         <Carbonite/>
                         <Darth position={[0, 0, 1]} scale={[0.01,0.01,0.01]}/>

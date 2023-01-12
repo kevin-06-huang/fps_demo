@@ -6,7 +6,8 @@ import { useKeyboardControls } from "@react-three/drei"
 import { CapsuleCollider, RigidBody, useRapier } from "@react-three/rapier"
 import Blaster from "./actors/Blaster"
 import Crosshair from "./Crosshair"
-import Projectile from "./actors/Projectile"
+import Sword from "./actors/Sword"
+import Axe from "./actors/Axe"
 
 const SPEED = 5
 const direction = new THREE.Vector3()
@@ -14,16 +15,17 @@ const frontVector = new THREE.Vector3()
 const sideVector = new THREE.Vector3()
 const rotation = new THREE.Vector3()
 
-const  Player = ({ addProjectile, useForce, lerp = THREE.MathUtils.lerp }) => {
-  const blaster = useRef()
+const  Player = ({ addProjectile, useForce, weapon, switchWeapon, lerp = THREE.MathUtils.lerp }) => {
+  const weaponRef = useRef()
   const ref = useRef()
   const rapier = useRapier()
   //const { scene } = useThree();
   const [, get] = useKeyboardControls()
-
+  
   const fireProjectile = () => {
-    const [x, y, z] = blaster.current.position;
-    addProjectile(x, y, z);
+    const [x, y, z] = weaponRef.current.position;
+    const [_x, _y, _z] = weaponRef.current.rotation;
+    addProjectile(x+0.42, y-0.95, z+0.7, _x, _y + Math.PI / 2, _z);
     /*const geometry = new THREE.BoxGeometry(1,1,10);
     const material = new THREE.MeshBasicMaterial( { color: '#BADA55' } );
     const projectile = new THREE.Mesh(geometry, material);
@@ -38,19 +40,21 @@ const  Player = ({ addProjectile, useForce, lerp = THREE.MathUtils.lerp }) => {
   }
 
   useFrame((state) => {
-    const { forward, backward, left, right, jump, force } = get()
-    if(force) useForce();
+    const { forward, backward, left, right, jump, force, one, two } = get()
+    if (force) useForce();
+    if (one) switchWeapon(1);
+    if (two) switchWeapon(2);
     const velocity = ref.current.linvel()
     // update camera
     state.camera.position.set(...ref.current.translation())
     // update blaster
-    blaster.current.children[0].rotation.x = lerp(blaster.current.children[0].rotation.x, Math.sin((velocity.length() > 1) * state.clock.elapsedTime * 10) / 40, 0.1)
-    blaster.current.rotation.copy(state.camera.rotation)
-    blaster.current.position.copy(state.camera.position).add(state.camera.getWorldDirection(rotation).multiplyScalar(1))
+    weaponRef.current.children[0].rotation.x = lerp(weaponRef.current.children[0].rotation.x, Math.sin((velocity.length() > 1) * state.clock.elapsedTime * 10) / 40, 0.1)
+    weaponRef.current.rotation.copy(state.camera.rotation)
+    weaponRef.current.position.copy(state.camera.position).add(state.camera.getWorldDirection(rotation).multiplyScalar(1))
     // movement
     frontVector.set(0, 0, backward - forward)
-    if ((forward - backward) != 0) blaster.current.children[0].rotation.x = 1.5;
-    if ((right - left) != 0) blaster.current.children[0].rotation.x = 1.5;
+    if ((forward - backward) != 0) weaponRef.current.children[0].rotation.x = 1.5;
+    if ((right - left) != 0) weaponRef.current.children[0].rotation.x = 1.5;
     sideVector.set(left - right, 0, 0)
     direction.subVectors(frontVector, sideVector).normalize().multiplyScalar(SPEED).applyEuler(state.camera.rotation)
     ref.current.setLinvel({ x: direction.x, y: velocity.y, z: direction.z })
@@ -65,13 +69,24 @@ const  Player = ({ addProjectile, useForce, lerp = THREE.MathUtils.lerp }) => {
       <RigidBody ref={ref} colliders={false} mass={1} type="dynamic" position={[0, 10, 0]} enabledRotations={[false, false, false]}>
         <CapsuleCollider args={[0.75, 0.5]} />
       </RigidBody>
-      <Crosshair/>
-      <group ref={blaster} onPointerMissed={(e) => {
-        blaster.current.children[0].rotation.x = 0.5;
-        fireProjectile();
+      {weapon === 1 ? 
+      <>
+        <Crosshair/>
+        <group ref={weaponRef} onPointerMissed={(e) => {
+          weaponRef.current.children[0].rotation.x = 0.5;
+          fireProjectile();
         }}>
-        <Blaster rotation={[0,-Math.PI / 2,0]} position={[0.3, -0.25, 0.5]} scale={[0.001,0.001,0.001]}/>
-      </group>
+          <Blaster rotation={[0,-Math.PI / 2,0]} position={[0.3, -0.25, 0.5]} scale={[0.001,0.001,0.001]}/>
+        </group>
+      </> :
+      <>
+        <group ref={weaponRef} onPointerMissed={(e) => {
+          weaponRef.current.children[0].rotation.x = 0.5;
+        }}>
+          <Sword position={[1,1,1]} scale={[1000,1000,1000]}/>
+        </group>
+      </>}
+      
     </>
   )
 }

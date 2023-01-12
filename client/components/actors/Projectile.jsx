@@ -8,22 +8,45 @@ title: Grenade Launcher Projectile (Downloadable)
 
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
+import {Line, Vector3} from "three";
+
+let justFired = true;
 
 const Projectile = (props) => {
   const ref = useRef();
   const { nodes, materials } = useGLTF(
     "/assets/grenade_launcher_projectile_downloadable.glb"
   );
-
+ // const { camera } = useThree();
+  
+  
   useFrame(() => {
-    const [x, y, z] = ref.current.position
-    ref.current.position.set(x + 0.1, y, z);
+    if (justFired) {
+        /*const vector = new Vector3(0, 0, -0.8).unproject(camera);
+        const [x, y, z] = vector
+        ref.current.position.set(x, y, z);*/
+        justFired = false;
+    } else {
+        const [x, y, z] = ref.current.position
+        const [_x, _y, _z] = ref.current.rotation
+       // console.log(_x);
+       // console.log(Math.PI);
+        //console.log(Math.sin());
+        const velocity = 0.1;
+        ref.current.position.set(x, y, z-0.1);
+        /*console.log(x,y,z);
+        console.log(_x, _y, _z);
+        console.log(ref.current);*/
+      //  ref.current.position.set(x + velocity * Math.cos(_x), y, z);
+    }
+    
+    /*const [x, y, z] = ref.current.position*/
+    
    // ref.current.position.set();
    // ref.current.velocity.set(0, 0, 0)
     //console.log(state);
-    /*const vector = new Vector3(0, 0, -0.8).unproject(camera);
-    const [x, y, z] = vector
+    /*
     dot.current.position.set(x, y, z);
     lines.current.position.set(x, y, z);
     lines.current.rotation.set(camera.rotation._x, camera.rotation._y, camera.rotation._z, camera.rotation._order);*/
