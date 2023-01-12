@@ -8,11 +8,28 @@ title: Darth Vader by Makeamo
 
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
+import {Line, Vector3} from "three";
+let justCreated = true;
 
 const Darth = (props) => {
+  const ref = useRef();
+
   const { nodes, materials } = useGLTF("/assets/darth-transformed.glb");
+  const { camera } = useThree();
+
+  useFrame(() => {
+      const [x, y, z] = ref.current.position
+      const [_x, _y, _z] = ref.current.rotation
+      const b = new Vector3(1,0,0);
+      const delta = b.applyEuler(ref.current.rotation);
+      const velocity = 0.05;
+      ref.current.position.set(x + velocity * (Math.random()-0.5), y, z + velocity * (Math.random()-0.5));
+      ref.current.rotation.set(_x , _y + Math.PI * (Math.random()-0.5), _z);
+   }
+  )
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} ref={ref} onClick={()=>{console.log('tet')}}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <mesh
