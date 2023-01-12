@@ -11,6 +11,9 @@ import Sword from "./actors/Sword"
 import blasterSound from "../assets/blaster.mp3"
 const pew = new Audio(blasterSound)
 
+import swordSound from "../assets/clean-fast-swooshaiff-14784.mp3"
+const whoosh = new Audio(swordSound)
+
 const SPEED = 5
 const direction = new THREE.Vector3()
 const frontVector = new THREE.Vector3()
@@ -87,6 +90,7 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, lerp = THREE.M
       <>
         <group ref={weaponRef} onPointerMissed={(e) => {
           weaponRef.current.children[0].rotation.x = -3.14;
+          whoosh.play();
         }}>
           <Sword position={[1,0,0]} rotation={[0, 12, Math.PI ]} scale={[0.12,0.12,0.12]}/>
         </group>
