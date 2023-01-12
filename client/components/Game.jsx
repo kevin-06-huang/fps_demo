@@ -14,6 +14,7 @@ import Force from './force/Force';
 import ATAT from './actors/ATAT';
 import { create } from "zustand"
 import Projectile from './actors/Projectile';
+import Forceprojectile from './actors/Forceprojectile';
 //import Vehicle from './Vehicle';
 // import GroundCannon from './GroundCannon';
 //<PerspectiveCamera position={[0, 1, 5]} rotation={[0, - 0.5 * Math.PI / 10, 0]} makeDefault/>
@@ -28,6 +29,10 @@ const useGameStore = create((set) => ({
     projectiles: [],
     addProjectile: (x, y, z, _x, _y, _z) => {
         set((state) => ({ projectiles: [...state.projectiles, [x, y, z, _x, _y, _z]] }));
+    },
+    force_projectiles: [],
+    addForceProjectile: (x, y, z, _x, _y, _z) => {
+        set((state) => ({ force_projectiles: [...state.force_projectiles, [x, y, z, _x, _y, _z]] }));
     },
     switchWeapon: (num) => set((state) => ({ weapon: num })),
     useForce: () => set((state) => ({ force: true })),
@@ -45,12 +50,21 @@ const Game = (props) => {
   const switchWeapon = useGameStore((state) => state.switchWeapon);
   const forcePowerToFire = useGameStore((state) => state.forcePowerToFire);
   const setNextForcePower = useGameStore((state) => state.setNextForcePower);
+  const addForceProjectile = useGameStore((state) => state.addForceProjectile);
 
   const Projectiles = () => {
     const projectiles = useGameStore((state) => state.projectiles);
     return projectiles.map((coords, index) => {
         const [x, y, z, _x, _y, _z] = coords;
     return <Projectile key={index} position={[x, y, z]} rotation={[_x, _y, _z]}/>
+    });
+  }
+
+  const Forceprojectiles = () => {
+    const force_projectiles = useGameStore((state) => state.force_projectiles);
+    return force_projectiles.map((coords, index) => {
+        const [x, y, z, _x, _y, _z] = coords;
+    return <Forceprojectile key={index} position={[x, y, z]} rotation={[_x, _y, _z]}/>
     });
   }
 
@@ -85,12 +99,13 @@ const Game = (props) => {
                     <Physics gravity={[0, -5, 0]} >
                         <Ground />
                         <Player addProjectile={addProjectile} useForce={useForce} weapon={weapon} switchWeapon={switchWeapon}
-                        forcePowerToFire={forcePowerToFire}/>
+                        forcePowerToFire={forcePowerToFire} addForceProjectile={addForceProjectile}/>
                         <Hall position={[0, 1.5, 1]}/>
                         <Carbonite/>
                         <Darth position={[4, 0, 1]} scale={[0.01,0.01,0.01]}/>
                         <ATAT position={[5, -0.5, 10]}/>
                         <Projectiles/>
+                        <Forceprojectiles/>
                     </Physics>
                     <PointerLockControls />
                 </Canvas>

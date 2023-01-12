@@ -23,7 +23,7 @@ const frontVector = new THREE.Vector3()
 const sideVector = new THREE.Vector3()
 const rotation = new THREE.Vector3()
 
-const  Player = ({ addProjectile, useForce, weapon, switchWeapon, forcePowerToFire, lerp = THREE.MathUtils.lerp }) => {
+const  Player = ({ addProjectile, useForce, weapon, switchWeapon, forcePowerToFire, addForceProjectile, lerp = THREE.MathUtils.lerp }) => {
   const weaponRef = useRef()
   const ref = useRef()
   const rapier = useRapier()
@@ -46,10 +46,26 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, forcePowerToFi
    // setTimeout(()=>{cube.position.set(0,1,0);
     //console.log(cube.position)}, 1000);
   }
+  const fireForceprojectile = () => {
+    const [x, y, z] = weaponRef.current.position;
+    const [_x, _y, _z] = weaponRef.current.rotation;
+    addForceProjectile(x+0.42, y-0.95, z+0.7, _x, _y + Math.PI / 2, _z);
+    /*const geometry = new THREE.BoxGeometry(1,1,10);
+    const material = new THREE.MeshBasicMaterial( { color: '#BADA55' } );
+    const projectile = new THREE.Mesh(geometry, material);
+    console.log(projectile.position);
+    projectile.position.set(blaster.current.position.x,blaster.current.position.y,blaster.current.position.z + 2)
+    scene.add(projectile);
+    console.log();*/
+    //console.log(this.);
+   // console.log(cube.position);
+   // setTimeout(()=>{cube.position.set(0,1,0);
+    //console.log(cube.position)}, 1000);
+  }
 
   useFrame((state) => {
     if (forcePowerToFire === "push") {
-      //fireProjectile();
+      fireForceprojectile();
     }
     const { forward, backward, left, right, jump, force, one, two } = get()
     if (force) { 
