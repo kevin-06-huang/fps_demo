@@ -99,7 +99,7 @@ const Game = (props) => {
                     <Physics gravity={[0, -5, 0]} >
                         <Ground />
                         <Player addProjectile={addProjectile} useForce={useForce} weapon={weapon} switchWeapon={switchWeapon}
-                        forcePowerToFire={forcePowerToFire} addForceProjectile={addForceProjectile}/>
+                        forcePowerToFire={forcePowerToFire} setNextForcePower={setNextForcePower} addForceProjectile={addForceProjectile}/>
                         <Hall position={[0, 1.5, 1]}/>
                         <Carbonite/>
                         <Darth position={[4, 0, 1]} scale={[0.01,0.01,0.01]}/>
