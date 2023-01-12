@@ -13,6 +13,7 @@ import Darth from './actors/Darth';
 //import Force from './force/Force';
 import ATAT from './actors/ATAT';
 import { create } from "zustand"
+import Projectile from './actors/Projectile';
 //import Vehicle from './Vehicle';
 // import GroundCannon from './GroundCannon';
 //<PerspectiveCamera position={[0, 1, 5]} rotation={[0, - 0.5 * Math.PI / 10, 0]} makeDefault/>
@@ -31,7 +32,12 @@ const useGameStore = create((set) => ({
 const Game = (props) => {
   const webcamRef = useRef(null);
   const addProjectile = useGameStore((state) => state.addProjectile);
-  //console.log(useGameStore((state) => state.projectiles));
+  
+  const Projectiles = () => {
+    const projectiles = useGameStore((state) => state.projectiles);
+    return projectiles.map((coords, index) => <Projectile key={index} position={coords} />);
+  }
+
   return (
             <div id="canvas-container" style={{height: window.innerHeight, width: window.innerWidth}}>
             <KeyboardControls
@@ -63,6 +69,7 @@ const Game = (props) => {
                         <Carbonite/>
                         <Darth position={[0, 0, 1]} scale={[0.01,0.01,0.01]}/>
                         <ATAT position={[5, -0.5, 10]}/>
+                        <Projectiles/>
                     </Physics>
                     <PointerLockControls />
                 </Canvas>
