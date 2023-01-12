@@ -29,7 +29,21 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, forcePowerToFi
   const rapier = useRapier()
   //const { scene } = useThree();
   const [, get] = useKeyboardControls()
+  let throttlePause;
+  const throttle = (callback, time) => {
+  //don't run the function if throttlePause is true 
+  if (throttlePause) return;
+  //set throttlePause to true after the if condition. This allows the function to be run once 
+  throttlePause = true;
   
+  //setTimeout runs the callback within the specified time 
+  setTimeout(() => {
+    callback();
+    
+    //throttlePause is set to false once the function has been called, allowing the throttle function to loop 
+    throttlePause = false;
+  }, time);
+  };
   const fireProjectile = () => {
     const [x, y, z] = weaponRef.current.position;
     const [_x, _y, _z] = weaponRef.current.rotation;
@@ -47,9 +61,10 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, forcePowerToFi
     //console.log(cube.position)}, 1000);
   }
   const fireForceprojectile = () => {
-    const [x, y, z] = weaponRef.current.position;
-    const [_x, _y, _z] = weaponRef.current.rotation;
-    addForceProjectile(x+0.42, y-0.95, z+0.7, _x, _y + Math.PI / 2, _z);
+      const [x, y, z] = weaponRef.current.position;
+      const [_x, _y, _z] = weaponRef.current.rotation;
+      addForceProjectile(x+0.42, y-0.95, z+0.7, _x, _y + Math.PI / 2, _z);
+    
     /*const geometry = new THREE.BoxGeometry(1,1,10);
     const material = new THREE.MeshBasicMaterial( { color: '#BADA55' } );
     const projectile = new THREE.Mesh(geometry, material);
@@ -65,7 +80,7 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, forcePowerToFi
 
   useFrame((state) => {
     if (forcePowerToFire === "push") {
-      fireForceprojectile();
+      throttle(fireForceprojectile, 1000);
     }
     const { forward, backward, left, right, jump, force, one, two } = get()
     if (force) { 
