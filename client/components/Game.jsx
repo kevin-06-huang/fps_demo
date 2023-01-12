@@ -31,6 +31,7 @@ const useGameStore = create((set) => ({
 const Game = (props) => {
   const webcamRef = useRef(null);
   const addProjectile = useGameStore((state) => state.addProjectile);
+  //console.log(useGameStore((state) => state.projectiles));
   return (
             <div id="canvas-container" style={{height: window.innerHeight, width: window.innerWidth}}>
             <KeyboardControls
