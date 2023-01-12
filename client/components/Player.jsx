@@ -14,6 +14,9 @@ const pew = new Audio(blasterSound)
 import swordSound from "../assets/clean-fast-swooshaiff-14784.mp3"
 const whoosh = new Audio(swordSound)
 
+import as_you_wish from "../assets/as_you_wish.mp3"
+const wish = new Audio(as_you_wish);
+
 const SPEED = 5
 const direction = new THREE.Vector3()
 const frontVector = new THREE.Vector3()
@@ -46,10 +49,13 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, forcePowerToFi
 
   useFrame((state) => {
     if (forcePowerToFire === "push") {
-      fireProjectile();
+      //fireProjectile();
     }
     const { forward, backward, left, right, jump, force, one, two } = get()
-    if (force) useForce();
+    if (force) { 
+      wish.play();
+      useForce();
+    }
     if (one) switchWeapon(1);
     if (two) switchWeapon(2);
     const velocity = ref.current.linvel()

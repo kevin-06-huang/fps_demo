@@ -30,7 +30,7 @@ const useGameStore = create((set) => ({
         set((state) => ({ projectiles: [...state.projectiles, [x, y, z, _x, _y, _z]] }));
     },
     switchWeapon: (num) => set((state) => ({ weapon: num })),
-    useForce: () => set((state) => ({ force: !state.force })),
+    useForce: () => set((state) => ({ force: true })),
     forcePowerToFire: "none",
     setNextForcePower: (power) => set((state) => ({ forcePowerToFire: power })),
   }))
