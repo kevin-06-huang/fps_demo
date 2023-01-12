@@ -25,6 +25,8 @@ import RaisedFistGesture from "./gestures/RaisedFist.js";
 import forceSound from "../../assets/magic-spell-6005.mp3"
 const force = new Audio(forceSound)
 
+import hypeMusic from "../../assets/what_did_you_say.mp3"
+const hype = new Audio(hypeMusic)
 
 const Force = React.forwardRef((props,ref) => {
 
@@ -34,7 +36,7 @@ const Force = React.forwardRef((props,ref) => {
         // loop and detect hand
         setInterval(() => {
           detect(net)
-        }, 500);
+        }, 200);
     
     }
 
@@ -81,6 +83,8 @@ const Force = React.forwardRef((props,ref) => {
               if (gesture.gestures[maxConfidence].name === 'raised_hand') { 
                 props.setNextForcePower("push");
                 force.play(); 
+              } else if (gesture.gestures[maxConfidence].name === 'victory') {
+                hype.play();
               }
             }
           }
