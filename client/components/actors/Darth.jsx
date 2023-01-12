@@ -19,8 +19,10 @@ const Darth = (props) => {
 
   const { nodes, materials } = useGLTF("/assets/darth-transformed.glb");
   const { camera } = useThree();
-
+  let i = 0;
   useFrame(() => {
+    
+    if (i >15) {
       const [x, y, z] = ref.current.position
       const [_x, _y, _z] = ref.current.rotation
       const b = new Vector3(1,0,0);
@@ -28,6 +30,9 @@ const Darth = (props) => {
       const velocity = 0.05;
       ref.current.position.set(x + velocity * (Math.random()-0.5), y, z + velocity * (Math.random()-0.5));
       ref.current.rotation.set(_x , _y + Math.PI * (Math.random()-0.5), _z);
+      i = 0;
+    }  
+    i++;
    }
   )
   return (
