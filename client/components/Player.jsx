@@ -89,7 +89,7 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, forcePowerToFi
       const first = intersects[0].object.parent
       first.position.set(first.position.x, first.position.y + 0.1, first.position.z);
       //console.log(first.position.set(first.position.x - 0.1, first.position.y, first.position.z - 0.1));
-      throttle(fireForceprojectile, 1000);
+      //throttle(fireForceprojectile, 1000);
       //fireForceprojectile();
       setNextForcePower("none");
     }
