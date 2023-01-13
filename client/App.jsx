@@ -16,7 +16,8 @@ class App extends Component {
 
   getSSID() {
     // document.cookie
-    return document.cookie;
+    // return document.cookie;
+    return true;
   } 
 
   render() {
