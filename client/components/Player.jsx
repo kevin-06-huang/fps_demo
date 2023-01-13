@@ -23,6 +23,9 @@ const frontVector = new THREE.Vector3()
 const sideVector = new THREE.Vector3()
 const rotation = new THREE.Vector3()
 
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+
 const  Player = ({ addProjectile, useForce, weapon, switchWeapon, forcePowerToFire, setNextForcePower, addForceProjectile, lerp = THREE.MathUtils.lerp }) => {
   const weaponRef = useRef()
   const ref = useRef()
@@ -77,9 +80,15 @@ const  Player = ({ addProjectile, useForce, weapon, switchWeapon, forcePowerToFi
    // setTimeout(()=>{cube.position.set(0,1,0);
     //console.log(cube.position)}, 1000);
   }
+  const { scene,raycaster, mouse, camera } = useThree();
 
   useFrame((state) => {
     if (forcePowerToFire === "push") {
+      raycaster.setFromCamera( mouse, camera );
+      const intersects = raycaster.intersectObjects( scene.children );
+      const first = intersects[0].object.parent
+      first.position.set(first.position.x, first.position.y + 0.1, first.position.z);
+      //console.log(first.position.set(first.position.x - 0.1, first.position.y, first.position.z - 0.1));
       throttle(fireForceprojectile, 1000);
       //fireForceprojectile();
       setNextForcePower("none");
