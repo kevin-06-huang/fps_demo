@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Login from './components/login/Login';
-import Signup from './components/login/Signup';
 import Game from './components/Game';
 
 //import './stylesheets/styles.css';
@@ -14,22 +12,8 @@ class App extends Component {
     };
   }
 
-  getSSID() {
-    // document.cookie
-    // return document.cookie;
-    return true;
-  } 
-
   render() {
-    return !this.getSSID() ?
-    <div>
-      <main>
-        <Routes>
-          <Route exact path="/" element={<Login/>}/>
-          <Route exact path="/signup" element={<Signup/>}/>
-        </Routes>
-      </main>
-    </div> :
+    return (
     <div className="router">
       <main>
         <Routes>
@@ -37,7 +21,7 @@ class App extends Component {
         </Routes>
       </main>
     </div>
-  }
+  )}
 }
 
 export default App;
