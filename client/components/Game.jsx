@@ -12,7 +12,7 @@ import Carbonite from './actors/Carbonite';
 import Darth from './actors/Darth';
 import Force from './force/Force';
 import ATAT from './actors/ATAT';
-import { create } from "zustand"
+import create from "zustand"
 import Projectile from './actors/Projectile';
 import Forceprojectile from './actors/Forceprojectile';
 //import Vehicle from './Vehicle';
